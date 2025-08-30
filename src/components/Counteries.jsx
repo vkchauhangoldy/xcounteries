@@ -4,7 +4,6 @@ import './Counteries.css'
 const Countries = () => {
     const [countries, setCountries] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
         getCountries();
@@ -19,7 +18,7 @@ const Countries = () => {
             const data = await response.json();
             setCountries(data);
         } catch (error) {
-            setError(error.message);
+            console.log("Error fetching data:", error)
         } finally {
             setLoading(false);
         }
@@ -27,10 +26,6 @@ const Countries = () => {
 
     if (loading) {
         return <p className="status">Loading countries...</p>;
-    }
-
-    if (error) {
-        return <p className="status error">Error: {error}</p>;
     }
 
     return (
